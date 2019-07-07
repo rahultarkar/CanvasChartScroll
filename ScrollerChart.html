@@ -25,9 +25,9 @@
                 var ini2 = 25;
                 for (var i = 0; i < 1000; i++) {
                     var x1 = ini1;
-                    var y1 = i%2 == 0 ? 100 : 150;
+                    var y1 = i%2 == 0 ? 50 : 200;
                     var x2 = ini2;
-                    var y2 = i%2 == 0 ? 120 : 170;
+                    var y2 = i%2 == 0 ? 40 : 210;
                     data1.push(x1);
                     data1.push(y1);
                     data2.push(x2);
@@ -38,8 +38,6 @@
                 chart = new tarkar.control.Chart({
                     "id":"chart",
                     "points": [data1, data2],
-                              //[20,100, 75,150, 200,100, 350,150, 450,100, 550,150, 630,100, 700,150, 790,100, 880,150, 960,100, 1060,150],
-                               //[20,120, 75,170, 200,120, 350,170, 450,120, 550,170, 640,120, 720,170, 780,120, 850,170, 970,120, 1050,170]],
                     "colors": ["red", "blue"],
                     "xAxis": xAxis,
                     "tension": 1,
@@ -55,20 +53,27 @@
                         chart.start -= 2;
                         chart.end -= 2;
                         chart.drawChart();
-                        if (chart.end < -1000) {
+                        if (chart.end < (0 - data1.length)) {
                             clearInterval(interval);
                         }
-                    }, 5);
+                    }, 2);
                 });
                 document.getElementById("clearBtn").addEventListener("click", function(){
                     clearInterval(interval);
                 });
+                document.getElementById("resetBtn").addEventListener("click", function(){
+                    chart.start = 0;
+                    chart.end = chart.range;
+                    chart.drawChart();
+                    clearInterval(interval);
+                })
             });
         </script>
     </head>
     <body>
         <canvas width="500px" height="330px" id="chart"></canvas><br />
         <button id="startBtn">Start</button>
-        <button id="clearBtn">Clear</button>
+        <button id="clearBtn">Stop</button>
+        <button id="resetBtn">Reset</button>
     </body>
 </html>
