@@ -43,10 +43,12 @@ if (window.tarkar == undefined) {
         this.context.lineTo(1190, 300);
         this.context.moveTo(10,10);
         this.context.lineTo(10, 300);
-        for (var i = 0; i <= this.range; i++) {
-            this.context.fillText(i, this.xAxis[i] + 8, 320);
-            this.context.moveTo(this.xAxis[i] + 10, 300);
-            this.context.lineTo(this.xAxis[i] + 10, 305);
+        for (var i = 0; i <= this.xAxis.length; i++) {
+            if (this.xAxis[i] + this.start > 3) {
+                this.context.fillText(i, this.xAxis[i] + 8 + this.start, 320);
+                this.context.moveTo(this.xAxis[i] + 10 + this.start, 300);
+                this.context.lineTo(this.xAxis[i] + 10 + this.start, 305);
+            }
         }        
         this.context.stroke();
     }
